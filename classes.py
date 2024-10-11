@@ -39,7 +39,7 @@ class RightTriangle(Polygon):
         centers = self.get_side_centers()
         return VGroup(*[MathTex(label).move_to(pos) for label, pos in zip(labels, centers)])
 
-    def get_angles(self, right_angle_length=0.4, angle_radius=0.7, color=WHITE) -> VGroup:
+    def get_angles(self, right_angle_length=0.5, angle_radius=0.7, color=WHITE) -> VGroup:
         v1, v2, v3 = self.get_vertices()
         # Não vou comentar essas paradas acho q dá pra entender
         right_angle = RightAngle(Line(v1, v2), Line(v1, v3), length=right_angle_length)
