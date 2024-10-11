@@ -23,3 +23,7 @@ class RightTriangle(Polygon):
         centers = [center + buffer * normal * sign for center, normal in zip(centers, normals)]
 
         return np.array(centers)
+
+    def get_labels(self, labels: list[str] = ["a", "b", "c"]) -> VGroup:
+        centers = self.get_side_centers()
+        return VGroup(*[MathTex(label).move_to(pos) for label, pos in zip(labels, centers)])
