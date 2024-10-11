@@ -27,3 +27,12 @@ class RightTriangle(Polygon):
     def get_labels(self, labels: list[str] = ["a", "b", "c"]) -> VGroup:
         centers = self.get_side_centers()
         return VGroup(*[MathTex(label).move_to(pos) for label, pos in zip(labels, centers)])
+
+    def get_angles(self, right_angle_length=0.4, angle_radius=0.7, color=WHITE) -> VGroup:
+        v1, v2, v3 = self.get_vertices()
+        right_angle = RightAngle(Line(v1, v2), Line(v1, v3), length=right_angle_length)
+        angle1 = Angle.from_three_points(v1, v2, v3, radius=angle_radius, other_angle=True)
+        angle2 = Angle.from_three_points(v2, v3, v1, radius=angle_radius, other_angle=True)
+        for a in [right_angle, angle1, angle2]:
+            a.set_color(color)
+        return VGroup(*[right_angle, angle1, angle2])
