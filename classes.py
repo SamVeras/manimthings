@@ -48,3 +48,36 @@ class RightTriangle(Polygon):
         for a in [right_angle, angle1, angle2]:
             a.set_color(color)
         return VGroup(*[right_angle, angle1, angle2])
+
+    def move_to(self, point_or_mobject, aligned_edge=ORIGIN, coor_mask=np.array([1, 1, 1])):
+        # O jeito que o triângulo retângulo tá sendo feito, a origem dele fica no canto ifnerior esquerdo
+        # então o jeito é dar um overload no método move_to
+
+        super().move_to(point_or_mobject, aligned_edge, coor_mask)
+
+        return self.shift(self.get_center() - self.get_center_of_mass())
+
+    def next_to(
+        self,
+        mobject_or_point,
+        direction=RIGHT,
+        buff=DEFAULT_MOBJECT_TO_EDGE_BUFFER,
+        aligned_edge=ORIGIN,
+        submobject_to_align=None,
+        index_of_submobject_to_align=None,
+        coor_mask=np.array([1, 1, 1]),
+        **kwargs
+    ):  # Mesma coisa que o move_to. Chamar o método original e arrumar depois
+
+        super().next_to(
+            mobject_or_point,
+            direction,
+            buff,
+            aligned_edge,
+            submobject_to_align,
+            index_of_submobject_to_align,
+            coor_mask,
+            **kwargs
+        )
+        # muito feio
+        return self.shift(self.get_center() - self.get_center_of_mass())
