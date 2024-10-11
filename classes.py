@@ -35,9 +35,11 @@ class RightTriangle(Polygon):
 
         return np.array(centers)
 
-    def get_labels(self, labels: list[str] = ["a", "b", "c"]) -> VGroup:
+    def get_labels(self, labels: list[str] = ["a", "b", "c"], color=GREEN) -> VGroup:
         centers = self.get_side_centers()
-        return VGroup(*[MathTex(label).move_to(pos) for label, pos in zip(labels, centers)])
+        return VGroup(
+            *[MathTex(label, color=color).move_to(pos) for label, pos in zip(labels, centers)]
+        )
 
     def get_angles(self, right_angle_length=0.5, angle_radius=0.7, color=WHITE) -> VGroup:
         v1, v2, v3 = self.get_vertices()
