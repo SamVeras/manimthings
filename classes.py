@@ -3,7 +3,7 @@ import numpy as np
 
 
 class RightTriangle(Polygon):
-    def __init__(self, side_a: float, side_b: float, **kwargs) -> None:
+    def __init__(self, side_a: float = 1, side_b: float = 1, **kwargs) -> None:
         super().__init__(ORIGIN, side_a * RIGHT, side_b * UP, **kwargs)
 
     def get_side_centers(self, buffer: float = MED_LARGE_BUFF) -> np.ndarray:
